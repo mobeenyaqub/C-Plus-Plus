@@ -1,0 +1,2 @@
+# portfolio #seniorcitizens
+A program to calculate the seats/buses required to take a specific number of senior citizens on outing, including all costs and discounts(as per the number of citizens). This program will also add additional caretakers if the citizens are over 24 (originally 2 caretakers will accompany,if the citizens are under 24).Moreover,more people can be added to the trip,if there are seats empty inside the bus. Also, the total cost of the trip will be calculated and company will find out if they made a profit,loss or break even.
