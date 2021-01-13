@@ -1,51 +1,74 @@
-#include <iostream>
+#include<iostream>
+#include<string>
+#include<cctype>
 using namespace std;
 
-int Find_Max_Divisors(int arr[], int size);
+//Creating a structure and declaring variables
+struct record {
+	int bookID{};
+	double price{};
+	string bookTitle{};
+	string bookAuthor{};
+};
 
 
 int main()
 {
-	int array[30];
+	record students[5]{};
+	string holder{};
 
-	for (int i = 0; i < 30; i++) {
-		cout << "Enter number at index [" << i << "] : ";
-		cin >> array[i];
+	//Looping over to get data from the user 5 times
+	for (int i = 0; i < 5; i++) {
+
+		cout << "Enter the book ID : ";
+		cin >> students[i].bookID;
+
+		cout << "\nEnter the name of books author : ";
+		cin.ignore();
+		getline(cin, students[i].bookAuthor);
+
+		cout << "\nEnter book title : ";
+		getline(cin, students[i].bookTitle);
+
+		cout << "\nEnter price of the book : ";
+		cin >> students[i].price;
+
+		cout << "\n------------------------------\n\n";
 	}
 
-	cout << "\nThis number has highest number of divisors : " << Find_Max_Divisors(array, 30) << endl;
+	cout << "Books with same authors are : \n";
 
-	return 0;
-}
+	//Looping over to find the books with same authors and displaying the titles of those books, with same authors
+	for (int i = 0; i < 5; i++) {
 
-int Find_Max_Divisors(int arr[], int size) {
+		string str1, str2;
+		int comma_count = 0;
 
-	int divisor = 0, greatest = 0;
+		str1 = students[i].bookAuthor;
 
-	int decider = 0;
+		for (int j = 0; j < 5; j++) {
+			str2 = students[j].bookAuthor;
 
-	for (int i = 0; i < size; i++) {
-
-		for (int j = 1; j < arr[i]; j++) {
-			if (arr[i] % j == 0) {
-				++divisor;
+			//Comparing authors throughout the array
+			if (str1 == str2) {
+				holder += students[j].bookTitle + ",";
+				students[j].bookTitle.clear();
+				comma_count++;
 			}
 
 		}
 
-
-		if (divisor > decider) {
-			decider = divisor;
-			greatest = arr[i];
+		//Comma count is being compared 
+		if (holder.length() > comma_count && comma_count > 1) {
+			int a = holder.length() - 1;
+			holder[a] = ' ';
+			cout << "\nAuthor : " << str1 << "\tTitle : " << holder << "\b" << endl;
 		}
 
+		holder.clear();
 
-		divisor = 0;
-
+		comma_count = 0;
 	}
 
-
-
-	return greatest;
-
+	return 0;
 }
