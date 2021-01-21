@@ -6,44 +6,59 @@ using namespace std;
 void markSheet();
 void gradeChecker(string gradeObtained, double& finalGPA, double creditHours);
 
-
 int main()
 {
-	double creditHours{}, totalCreditHours{ 0 }, totalCourses{}, counter{ 1 };
-	string gradeObtained{};
-	string courseName{};
 	double finalGPA{ 0.00 };
+	int totalCourses{ 0 }, counter{ 1 }, creditHours{ 0 }, totalCreditHours{ 0 };
+	string gradeObtained{}, courseName{};
+	char choice{ 'a' };
 
-	cout << "\t\t\t\t\t\tWelcome to CGPA calculator\n\n";
-	cout << "\nEnter the total number of courses you're studying : ";
-	cin >> totalCourses;
+	do {
 
-	markSheet();
+		cout << "\t\t\t\t\t\tWelcome to CGPA calculator\n\n";
+		cout << "\nEnter the total number of courses you're studying : ";
+		cin >> totalCourses;
 
-	while (totalCourses > 0) {
+		markSheet();
 
-		cout << "\n\n\rEnter the name of course " << counter << " : ";
-		cin.ignore();
-		getline(cin, courseName);
+		while (totalCourses > 0) {
 
-		cout << "\n\n\rEnter credit hours of course " << counter << " : ";
-		cin >> creditHours;
+			cout << "\n\n\rEnter the name of course " << counter << " : ";
+			cin.ignore();
+			getline(cin, courseName);
 
-		cout << "\n\n\rEnter the grade you obtained in course " << counter << " : ";
-		cin >> gradeObtained;
-		
-		gradeChecker(gradeObtained, finalGPA, creditHours);
+			cout << "\n\n\rEnter credit hours of course " << counter << " : ";
+			cin >> creditHours;
 
-		totalCreditHours += creditHours;
+			cout << "\n\n\rEnter the grade you obtained in course " << counter << " : ";
+			cin >> gradeObtained;
 
-		totalCourses--;
+			gradeChecker(gradeObtained, finalGPA, creditHours);
 
-		counter++;
+			totalCreditHours += creditHours;
 
-	} 
+			totalCourses--;
 
-	cout << "\n\n\t\t\t\t\t\tYour total CGPA = " << fixed << setprecision(2) << (finalGPA / totalCreditHours) << endl;
+			counter++;
 
+		}
+
+		cout << "\n\n\t\t\t\t\t\tYour total CGPA = " << fixed << setprecision(2) << (finalGPA / totalCreditHours) << endl;
+
+		cout << "\n\nWould you like to start over?\n\nPress any key to start over or press \"n\" or \"N\" to exit" << endl << endl;
+		cin >> choice;
+
+		finalGPA = 0;
+		gradeObtained.clear();
+		courseName.clear();
+		counter = 1;
+		totalCreditHours = 0;
+
+	} while ((choice != 'N') && (choice != 'n'));
+
+	cout << "\n\n\t\t\t\t\t\t\t\tBye!" << endl << endl;
+
+	system("pause");
 	return 0;
 }
 
@@ -101,7 +116,7 @@ void gradeChecker(string gradeObtained, double& finalGPA, double creditHours) {
 		finalGPA += (0.00 * creditHours);
 	}
 	else {
-		cout << "Invalid grade" << endl;
+		cout << "Invalid grade entered" << endl;
 	}
 
 
