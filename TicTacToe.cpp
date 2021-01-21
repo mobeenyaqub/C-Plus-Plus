@@ -5,7 +5,67 @@
 #include <cstdlib>
 using namespace std;
 
-void game_position(char game[3][3],char count) {
+void game_position(char game[3][3], char count);
+void random_player_decider(string enter, int& player_chooser);
+void position_entry(int& position, vector<int>& position_check);
+void position_decider(char game[3][3], int& player_chooser, int position);
+void player_change_indicator(int& player_chooser, int check);
+void amended_position(char game[3][3]);
+bool winner_decider(char game[3][3], int check);
+
+int main() {
+
+    srand(time(0));
+
+    string enter{};
+    char game[3][3]{}, count = 49, choice{ 'a' };
+    int player_chooser{}, position{};
+    int check = 0;
+    vector <int> position_check{ 0 };
+    bool checker{};
+    
+
+    do {
+
+        game_position(game, count);
+
+        random_player_decider(enter, player_chooser);
+
+        do {
+
+            position_entry(position, position_check);
+
+            position_decider(game, player_chooser, position);
+
+            amended_position(game);
+
+            checker = winner_decider(game, check);
+
+            if (checker) {
+                break;
+            }
+
+            player_change_indicator(player_chooser, check);
+
+            
+
+            check++;
+
+        } while (check < 9);
+
+        cout << "\n\nWould you like to start over?\n\nPress any key to start over or press \"n\" or \"N\" to exit" << endl << endl;
+        cin >> choice;
+
+        position_check.clear();
+        position_check.push_back(0);
+        check = 0;
+        
+    } while (choice != 'N' && choice != 'n');
+
+    return 0;
+}
+
+void game_position(char game[3][3], char count) {
 
     cout << "\t\t\t\t\t\tPlayer 1 : \"X\"\n\n\t\t\t\t\t\tPlayer 2 : \"O\" " << endl << endl;
 
@@ -30,22 +90,22 @@ void game_position(char game[3][3],char count) {
     }
 
 }
-void random_player_decider(string enter, int &player_chooser) {
+void random_player_decider(string enter, int& player_chooser) {
 
-    cout << "Press enter to decide randomly whom to start with : ";
+    cout << "\n\nPress enter to decide randomly whom to start with : ";
     getline(cin, enter);
 
     if (rand() % 2 == 0) {
-        cout << "\n\t\t\t\t\t\tPlayer 1 turn" << endl << endl;
+        cout << "\n\n\t\t\t\t\t\tPlayer 1 turn" << endl << endl;
         player_chooser = 2;
     }
     else {
-        cout << "\n\t\t\t\t\t\tPlayer 2 turn" << endl << endl;
+        cout << "\n\n\t\t\t\t\t\tPlayer 2 turn" << endl << endl;
         player_chooser = 3;
     }
 
 }
-void position_entry(int &position, vector<int> &position_check) {
+void position_entry(int& position, vector<int>& position_check) {
 
     bool decision = false;
 
@@ -53,7 +113,7 @@ void position_entry(int &position, vector<int> &position_check) {
 
         do {
 
-            cout << "\rEnter position of your turn : ";
+            cout << "Enter position of your turn : ";
             cin >> position;
 
         } while (position < 1 || position > 9);
@@ -62,7 +122,7 @@ void position_entry(int &position, vector<int> &position_check) {
 
             if (position == position_check.at(i)) {
                 decision = false;
-                cout << "\t\t\t\t\t\t\"Position already reserved.Try again!\"" << endl;
+                cout << "\n\n\t\t\t\t\t\t\"Position already reserved.Try again!\"" << endl << endl;
                 break;
             }
             else {
@@ -76,7 +136,7 @@ void position_entry(int &position, vector<int> &position_check) {
     } while (!decision);
 
 }
-void position_decider(char game[3][3],int &player_chooser,int position) {
+void position_decider(char game[3][3], int& player_chooser, int position) {
 
     switch (position)
     {
@@ -211,7 +271,7 @@ void amended_position(char game[3][3]) {
     }
 
 }
-void player_change_indicator(int &player_chooser,int check) {
+void player_change_indicator(int& player_chooser, int check) {
 
     if (check < 8) {
 
@@ -223,9 +283,9 @@ void player_change_indicator(int &player_chooser,int check) {
         }
 
     }
-    
+
 }
-bool winner_decider(char game[3][3],int check) {
+bool winner_decider(char game[3][3], int check) {
 
     bool checking = false;
 
@@ -233,101 +293,62 @@ bool winner_decider(char game[3][3],int check) {
 
         //Player 1 decider
         if ((game[0][0] == 'X') & (game[0][1] == 'X') && (game[0][2] == 'X')) {
-            cout << "\n\n\t\t\t\t******Player 1 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[1][0] == 'X') & (game[1][1] == 'X') && (game[1][2] == 'X')) {
-            cout << "\n\n\t\t\t\t******Player 1 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[2][0] == 'X') & (game[2][1] == 'X') && (game[2][2] == 'X')) {
-            cout << "\n\n\t\t\t\t******Player 1 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[0][0] == 'X') & (game[1][1] == 'X') && (game[2][2] == 'X')) {
-            cout << "\n\n\t\t\t\t******Player 1 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[0][2] == 'X') & (game[1][1] == 'X') && (game[2][0] == 'X')) {
-            cout << "\n\n\t\t\t\t******Player 1 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[0][1] == 'X') & (game[1][1] == 'X') && (game[2][1] == 'X')) {
-            cout << "\n\n\t\t\t\t******Player 1 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         //Player 2 decider
         else if ((game[0][0] == 'O') & (game[0][1] == 'O') && (game[0][2] == 'O')) {
-            cout << "\n\n\t\t\t\t******Player 2 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[1][0] == 'O') & (game[1][1] == 'O') && (game[1][2] == 'O')) {
-            cout << "\n\n\t\t\t\t******Player 2 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[2][0] == 'O') & (game[2][1] == 'O') && (game[2][2] == 'O')) {
-            cout << "\n\n\t\t\t\t******Player 2 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[0][0] == 'O') & (game[1][1] == 'O') && (game[2][2] == 'O')) {
-            cout << "\n\n\t\t\t\t******Player 2 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[0][2] == 'O') & (game[1][1] == 'O') && (game[2][0] == 'O')) {
-            cout << "\n\n\t\t\t\t******Player 2 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
         else if ((game[0][1] == 'O') & (game[1][1] == 'O') && (game[2][1] == 'O')) {
-            cout << "\n\n\t\t\t\t******Player 2 wins. Congratulations ******" << endl << endl;
+            cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
 
     }
 
     if ((check == 8) && (!checking)) {
-   
-     cout << "\n\n\t\t\t\t\t******It's a draw. Try again ******" << endl << endl;
+
+        cout << "\n\n\t\t\t\t\t****** It's a draw. Try again ******" << endl << endl;
 
     }
 
     return checking;
-}
-
-
-int main() {
-    
-    srand(time(0));
-
-    string enter;
-    char game[3][3]{}, count = 49;
-    int player_chooser{}, position{};
-    int check = 0;
-    vector <int> position_check{ 0 };
-    bool checker{};
-    game_position(game,count);
-
-    random_player_decider(enter,player_chooser);
-
-    do {
-
-        position_entry(position,position_check);
-
-        position_decider(game, player_chooser, position);
-
-        amended_position(game);
-
-        player_change_indicator(player_chooser,check);
-
-        checker = winner_decider(game, check);
-
-        if (checker) {
-            break;
-        }
-        
-        check++;
-
-    } while (check < 9);
-    
-    
-    return 0;
 }
