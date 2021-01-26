@@ -27,11 +27,11 @@ int main()
 		else if (number > 9 && number < 100) {
 			tens(number);
 		}
-		else if (number < 10) {
-			units(number);
-		}
 		else if (number == 0) {
 			cout << endl << number << " = Zero" << endl << endl;
+		}
+		else if (number < 10) {
+			units(number);
 		}
 		else {
 			cout << endl << number << " Conversion not yet supported!" << endl << endl;
@@ -42,6 +42,7 @@ int main()
 
 	} while (choice != '1');
 
+	cout << "\n\nBye!" << endl << endl;
 
 	return 0;
 }
@@ -319,43 +320,43 @@ void hundreds(int number) {
 		{
 		case 10:
 			cout << "Ten";
-			flag = true;
+			flag = false;
 			break;
 		case 11:
 			cout << "Eleven";
-			flag = true;
+			flag = false;
 			break;
 		case 12:
 			cout << "Twelve";
-			flag = true;
+			flag = false;
 			break;
 		case 13:
 			cout << "Thirteen";
-			flag = true;
+			flag = false;
 			break;
 		case 14:
 			cout << "Fourteen";
-			flag = true;
+			flag = false;
 			break;
 		case 15:
 			cout << "Fifteen";
-			flag = true;
+			flag = false;
 			break;
 		case 16:
 			cout << "Sixteen";
-			flag = true;
+			flag = false;
 			break;
 		case 17:
 			cout << "Seventeen";
-			flag = true;
+			flag = false;
 			break;
 		case 18:
 			cout << "Eighteen";
-			flag = true;
+			flag = false;
 			break;
 		case 19:
 			cout << "Nineteen";
-			flag = true;
+			flag = false;
 			break;
 		}
 
@@ -396,7 +397,9 @@ void hundreds(int number) {
 			flag = true;
 		}
 
-		if (!flag) {
+		remainder = remainder % 10;
+
+		if (flag) {
 
 			switch (remainder)
 			{
