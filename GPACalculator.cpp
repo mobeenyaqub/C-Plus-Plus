@@ -23,14 +23,14 @@ int main()
 
 		while (totalCourses > 0) {
 
-			cout << "\n\n\rEnter the name of course " << counter << " : ";
+			cout << "\n\nEnter the name of course " << counter << " : ";
 			cin.ignore();
 			getline(cin, courseName);
 
-			cout << "\n\n\rEnter credit hours of course " << counter << " : ";
+			cout << "Enter credit hours of course " << counter << " : ";
 			cin >> creditHours;
 
-			cout << "\n\n\rEnter the grade you obtained in course " << counter << " : ";
+			cout << "Enter the grade you obtained in course " << counter << " : ";
 			cin >> gradeObtained;
 
 			gradeChecker(gradeObtained, finalGPA, creditHours);
