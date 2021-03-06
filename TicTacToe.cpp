@@ -23,7 +23,7 @@ int main() {
     int check = 0;
     vector <int> position_check{ 0 };
     bool checker{};
-    
+
 
     do {
 
@@ -47,19 +47,19 @@ int main() {
 
             player_change_indicator(player_chooser, check);
 
-            
+
 
             check++;
 
         } while (check < 9);
 
-        cout << "\n\nWould you like to start over?\n\nPress any key to start over or press \"n\" or \"N\" to exit" << endl << endl;
+        cout << "\n\nPress any key to start over or press \"n\" or \"N\" to exit" << endl << endl;
         cin >> choice;
 
         position_check.clear();
         position_check.push_back(0);
         check = 0;
-        
+
     } while (choice != 'N' && choice != 'n');
 
     return 0;
@@ -316,6 +316,15 @@ bool winner_decider(char game[3][3], int check) {
             cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
+        else if ((game[0][2] == 'X') & (game[1][2] == 'X') && (game[2][2] == 'X')) {
+            cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
+            checking = true;
+        }
+        else if ((game[0][0] == 'X') & (game[1][0] == 'X') && (game[2][0] == 'X')) {
+            cout << "\n\n\t\t\t\t****** Player 1 wins. Congratulations ******" << endl << endl;
+            checking = true;
+        }
+
         //Player 2 decider
         else if ((game[0][0] == 'O') & (game[0][1] == 'O') && (game[0][2] == 'O')) {
             cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
@@ -338,6 +347,14 @@ bool winner_decider(char game[3][3], int check) {
             checking = true;
         }
         else if ((game[0][1] == 'O') & (game[1][1] == 'O') && (game[2][1] == 'O')) {
+            cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
+            checking = true;
+        }
+        else if ((game[0][2] == 'O') & (game[1][2] == 'O') && (game[2][2] == 'O')) {
+            cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
+            checking = true;
+        }
+        else if ((game[0][0] == 'O') & (game[1][0] == 'O') && (game[2][0] == 'O')) {
             cout << "\n\n\t\t\t\t****** Player 2 wins. Congratulations ******" << endl << endl;
             checking = true;
         }
